@@ -1,5 +1,5 @@
-define(['snap'],
-function(Snap) {
+define(['snap', 'number-utils'],
+function(Snap,   NumberUtils) {
 	return Snap.plugin(function(Snap, Element, Paper) {
 
 		var HORIZONTAL_PADDING = 10;
