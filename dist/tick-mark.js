@@ -1,34 +1,36 @@
-define(['snap', 'number-utils'],
-function(Snap,   NumberUtils) {
+define(['snap', 'Config', 'number-utils'],
+function(Snap,   Config,   NumberUtils) {
 	return Snap.plugin(function(Snap, Element, Paper) {
 
-		var HORIZONTAL_PADDING = 10;
-		var VERTICAL_PADDING = 10;
-
-		var FONT_FAMILY = "'Lato', sans-serif";
-		var FONT_WEIGHT = 300;
-		var FONT_SIZE = 12;
-
+		/**
+		 * Plugin for drawing ticks for use on axes
+		 * @param {Number} x
+		 * @param {Number} y
+		 * @param {String} orientation
+		 * @param {Number} size
+		 * @param {String} value
+		 */
 		Paper.prototype.tickMark = function(x, y, orientation, size, value) {
 			var paper = this;
+
 			if (orientation === 'horizontal') {
-				var text = this.text(x - HORIZONTAL_PADDING, y, NumberUtils.renderValue(value))
+				var text = this.text(x - Config.TICK_MARK_HORIZONTAL_PADDING, y, NumberUtils.renderValue(value))
 					.attr({
-						'font-family': FONT_FAMILY,
-						'font-weight': FONT_WEIGHT,
-						'font-size': FONT_SIZE,
+						'font-family': Config.FONT_FAMILY,
+						'font-size': Config.TEXT_SIZE_SMALL,
+						'font-weight': Config.TICK_MARK_FONT_WEIGHT,
 						'text-anchor': 'end',
-						'transform': 't0 ' + FONT_SIZE / 3.3
+						'transform': 't0 ' + Config.TEXT_SIZE_SMALL / 3.3
 					});
 				var tickMark = this.g(text)
 					.addClass('fm-tick-mark');
 			} else if (orientation === 'vertical') {
 				var line = this.line(x, y, x, y + size);
-				var text = this.text(x, y + VERTICAL_PADDING + FONT_SIZE / 2, NumberUtils.renderValue(value))
+				var text = this.text(x, y + Config.TICK_MARK_VERTICAL_PADDING + Config.TEXT_SIZE_SMALL / 2, NumberUtils.renderValue(value))
 					.attr({
-						'font-family': FONT_FAMILY,
-						'font-weight': FONT_WEIGHT,
-						'font-size': FONT_SIZE,
+						'font-family': Config.FONT_FAMILY,
+						'font-size': Config.TEXT_SIZE_SMALL,
+						'font-weight': Config.TICK_MARK_FONT_WEIGHT,
 						'text-anchor': 'middle'
 					});
 				var tickMark = this.g(text, line)
