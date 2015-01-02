@@ -12,7 +12,7 @@ function(Snap,   Config) {
 		 */
 		Paper.prototype.tickMark = function(x, y, orientation, size, value) {
 			var paper = this;
-
+			
 			if (orientation === 'horizontal') {
 				var text = this.text(x - Config.TICK_MARK_HORIZONTAL_PADDING, y, value)
 					.attr({
@@ -20,7 +20,7 @@ function(Snap,   Config) {
 						'font-size': Config.TEXT_SIZE_SMALL,
 						'font-weight': Config.TICK_MARK_FONT_WEIGHT,
 						'text-anchor': 'end',
-						'transform': 't0 ' + Config.TEXT_SIZE_SMALL / 3.3
+						'dominant-baseline': 'central'
 					});
 				var tickMark = this.g(text)
 					.addClass('fm-tick-mark');
